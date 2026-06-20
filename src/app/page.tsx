@@ -1,0 +1,26 @@
+import Hero from '@/components/Hero';
+import Services from '@/components/Services';
+import News from '@/components/News';
+import Gallery from '@/components/Gallery';
+import WhyChooseUs from '@/components/WhyChooseUs';
+import References from '@/components/References';
+import FAQ from '@/components/FAQ';
+import Contact from '@/components/Contact';
+import JsonLd from '@/components/JsonLd';
+import { localBusinessJsonLd, websiteJsonLd } from '@/lib/seo';
+
+export default function Home() {
+  return (
+    <main className="home-flow min-h-screen">
+      <JsonLd data={[localBusinessJsonLd(), websiteJsonLd()]} />
+      <Hero />
+      <WhyChooseUs />
+      <Services />
+      <Gallery />
+      <References />
+      <FAQ />
+      <News />
+      <Contact />
+    </main>
+  );
+}
