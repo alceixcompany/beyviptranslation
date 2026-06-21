@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { createPortal } from 'react-dom';
+import { LanguageSelect } from '@/components/LanguageProvider';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -81,11 +82,11 @@ const Header = () => {
           {/* Logo */}
           <Link href="/" className="group flex items-center">
             <Image
-              src="/beyvip/logo.svg"
+              src="/beyvip/logo-horizontal-transparent-v2.png"
               alt="BEYVIP Translation Office"
-              width={176}
-              height={48}
-              className="h-10 w-auto transition-transform duration-300 group-hover:scale-[1.02] sm:h-12"
+              width={224}
+              height={60}
+              className="h-11 w-auto mix-blend-multiply transition-transform duration-300 group-hover:scale-[1.02] sm:h-12"
               priority
             />
           </Link>
@@ -105,6 +106,9 @@ const Header = () => {
             >
               WhatsApp
             </a>
+            <div className="ml-2">
+              <LanguageSelect />
+            </div>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -139,11 +143,11 @@ const Header = () => {
             <div className="flex items-center justify-between px-6 py-4 border-b border-[rgba(212,175,55,0.26)]">
               <Link href="/" className="flex items-center" onClick={() => setIsMenuOpen(false)}>
                 <Image 
-                  src="/beyvip/logo.svg"
+                  src="/beyvip/logo-horizontal-transparent-v2.png"
                   alt="BEYVIP Translation Office"
-                  width={132}
-                  height={36}
-                  className="h-9 w-auto brightness-0 invert"
+                  width={190}
+                  height={51}
+                  className="h-12 w-auto rounded bg-white object-contain"
                   priority
                 />
               </Link>
@@ -179,6 +183,9 @@ const Header = () => {
                 >
                   WHATSAPP
                 </a>
+                <div className="mt-5 px-4">
+                  <LanguageSelect compact />
+                </div>
               </div>
             </nav>
           </div>,

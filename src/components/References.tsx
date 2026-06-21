@@ -2,7 +2,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { FiCheckCircle, FiMapPin, FiStar } from 'react-icons/fi';
+import { FiCheckCircle, FiFileText, FiMapPin, FiStar } from 'react-icons/fi';
+import { useLanguage } from '@/components/LanguageProvider';
 
 const reviews = [
   {
@@ -48,6 +49,7 @@ const reviews = [
 ] as const;
 
 const References = () => {
+  const { t } = useLanguage();
   const [counts, setCounts] = useState({
     reviews: 0,
     customers: 0,
@@ -118,41 +120,39 @@ const References = () => {
     <section id="referanslar" className="lale-light-section py-24 sm:py-28">
       <div className="relative mx-auto max-w-7xl px-5 sm:px-7 lg:px-10">
         <div className="mx-auto max-w-3xl text-center">
-          <div className="lale-kicker">Neden BEYVIP?</div>
+          <div className="lale-kicker">{t('Neden BEYVIP?')}</div>
           <h2 className="mt-6 font-serif text-3xl leading-tight text-[var(--dream-dark)] sm:text-4xl">
-            Hız, dikkat ve resmi süreç bilgisini
-            <span className="block text-[var(--lale-gold)]">aynı dosyada buluşturuyoruz</span>
+            {t('Hız, dikkat ve resmi süreç bilgisini')}
+            <span className="block text-[var(--lale-gold)]">{t('aynı dosyada buluşturuyoruz')}</span>
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[var(--dream-text)] sm:text-base">
-            Belgelerinizi yalnızca çevirmekle kalmıyor, başvuru amacına uygun
-            düzen, onay ihtiyacı ve teslim süresiyle birlikte ele alıyoruz.
+            {t('Belgelerinizi yalnızca çevirmekle kalmıyor, başvuru amacına uygun düzen, onay ihtiyacı ve teslim süresiyle birlikte ele alıyoruz.')}
           </p>
         </div>
 
-        <div className="mt-16 grid gap-8 lg:grid-cols-[0.82fr_1.18fr]">
+        <div className="mt-16 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="rounded-[32px] border border-[rgba(223,167,69,0.16)] bg-[rgba(255,255,255,0.84)] p-6 shadow-[0_26px_70px_rgba(95,89,108,0.08)] sm:p-8"
+            className="rounded-[18px] border border-[rgba(223,167,69,0.16)] bg-white/88 p-6 shadow-[0_22px_58px_rgba(95,89,108,0.08)] sm:p-8"
           >
-            <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[rgba(223,167,69,0.14)] text-[var(--lale-gold)]">
-                <FiCheckCircle className="h-6 w-6" />
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[rgba(223,167,69,0.14)] text-[var(--lale-gold)]">
+                <FiFileText className="h-6 w-6" />
               </div>
               <div>
-                <p className="text-sm tracking-[0.12em] text-[var(--lale-gold)]">BEYVIP AVANTAJLARI</p>
-                <h3 className="mt-1 text-xl font-medium text-[var(--dream-dark)]">Net teklif, doğru format, hızlı teslim</h3>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--lale-gold)]">{t('BEYVIP AVANTAJLARI')}</p>
+                <h3 className="mt-2 font-serif text-2xl leading-tight text-[var(--dream-dark)]">{t('Net teklif, doğru format, hızlı teslim')}</h3>
               </div>
             </div>
 
             <p className="mt-5 text-sm leading-7 text-[var(--dream-text)]">
-              Pasaport, kimlik, diploma, sözleşme ve konsolosluk evraklarında
-              belgenin kullanım amacına göre kontrollü bir tercüme akışı sunuyoruz.
+              {t('Pasaport, kimlik, diploma, sözleşme ve konsolosluk evraklarında belgenin kullanım amacına göre kontrollü bir tercüme akışı sunuyoruz.')}
             </p>
 
-            <div className="mt-6 space-y-3">
+            <div className="mt-7 grid gap-3">
               {[
                 'Belge türüne göre doğru teslim formatı',
                 'Yeminli ve noter onaylı tercüme yönlendirmesi',
@@ -161,33 +161,33 @@ const References = () => {
               ].map((item) => (
                 <div
                   key={item}
-                  className="flex items-center gap-3 rounded-[20px] border border-[rgba(223,167,69,0.14)] bg-[rgba(247,240,242,0.72)] px-4 py-3"
+                  className="flex items-center gap-3 rounded-[14px] border border-[rgba(223,167,69,0.14)] bg-[rgba(247,241,229,0.54)] px-4 py-3"
                 >
                   <FiCheckCircle className="h-5 w-5 shrink-0 text-[var(--lale-gold)]" />
-                  <span className="text-sm text-[var(--dream-dark)]">{item}</span>
+                  <span className="text-sm text-[var(--dream-dark)]">{t(item)}</span>
                 </div>
               ))}
             </div>
 
             <div
               ref={statsRef}
-              className="mt-8 grid gap-4 border-t border-[rgba(223,167,69,0.14)] pt-6 sm:grid-cols-2"
+              className="mt-8 grid gap-3 border-t border-[rgba(223,167,69,0.14)] pt-6 sm:grid-cols-2"
             >
-              <div className="rounded-[22px] bg-white px-5 py-5 text-center">
+              <div className="rounded-[14px] border border-[rgba(223,167,69,0.12)] bg-white px-5 py-5 text-center">
                 <div className="text-2xl font-semibold text-[var(--lale-gold)]">{counts.reviews}+</div>
-                <p className="mt-2 text-sm text-[var(--dream-text)]">Olumlu geri dönüş</p>
+                <p className="mt-2 text-sm text-[var(--dream-text)]">{t('Olumlu geri dönüş')}</p>
               </div>
-              <div className="rounded-[22px] bg-white px-5 py-5 text-center">
+              <div className="rounded-[14px] border border-[rgba(223,167,69,0.12)] bg-white px-5 py-5 text-center">
                 <div className="text-2xl font-semibold text-[var(--lale-gold)]">%{counts.satisfaction}</div>
-                <p className="mt-2 text-sm text-[var(--dream-text)]">Memnuniyet</p>
+                <p className="mt-2 text-sm text-[var(--dream-text)]">{t('Memnuniyet')}</p>
               </div>
-              <div className="rounded-[22px] bg-white px-5 py-5 text-center">
+              <div className="rounded-[14px] border border-[rgba(223,167,69,0.12)] bg-white px-5 py-5 text-center">
                 <div className="text-2xl font-semibold text-[var(--lale-gold)]">{counts.customers}+</div>
-                <p className="mt-2 text-sm text-[var(--dream-text)]">Tamamlanan evrak</p>
+                <p className="mt-2 text-sm text-[var(--dream-text)]">{t('Tamamlanan evrak')}</p>
               </div>
-              <div className="rounded-[22px] bg-white px-5 py-5 text-center">
+              <div className="rounded-[14px] border border-[rgba(223,167,69,0.12)] bg-white px-5 py-5 text-center">
                 <div className="text-2xl font-semibold text-[var(--lale-gold)]">{counts.years}+</div>
-                <p className="mt-2 text-sm text-[var(--dream-text)]">Dil desteği</p>
+                <p className="mt-2 text-sm text-[var(--dream-text)]">{t('Dil desteği')}</p>
               </div>
             </div>
           </motion.div>
@@ -200,7 +200,7 @@ const References = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.58, delay: index * 0.04, ease: 'easeOut' }}
-                className="rounded-[28px] border border-[rgba(223,167,69,0.18)] bg-white/88 p-6 shadow-[0_18px_50px_rgba(95,89,108,0.10)]"
+                className="flex min-h-[320px] flex-col rounded-[18px] border border-[rgba(223,167,69,0.18)] bg-white/80 p-6 shadow-[0_16px_42px_rgba(95,89,108,0.08)]"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-center gap-3">
@@ -215,11 +215,11 @@ const References = () => {
                       <h4 className="text-base font-semibold text-[var(--dream-dark)]">{review.name}</h4>
                       <div className="mt-1 flex items-center gap-2 text-xs text-[var(--dream-text)]">
                         <FiMapPin className="h-3.5 w-3.5" />
-                        <span>{review.location}</span>
+                        <span>{t(review.location)}</span>
                       </div>
                     </div>
                   </div>
-                  <div className="text-xs text-[var(--dream-text)]">{review.time}</div>
+                  <div className="text-xs text-[var(--dream-text)]">{t(review.time)}</div>
                 </div>
 
                 <div className="mt-4 flex items-center gap-1 text-[var(--lale-gold)]">
@@ -228,13 +228,13 @@ const References = () => {
                   ))}
                 </div>
 
-                <p className="mt-4 text-sm leading-7 text-[var(--dream-text)]">{review.comment}</p>
+                <p className="mt-4 flex-1 text-sm leading-7 text-[var(--dream-text)]">{t(review.comment)}</p>
 
                 <div className="mt-5 flex items-center justify-between border-t border-[rgba(223,167,69,0.12)] pt-4">
                   <span className="rounded-full border border-[rgba(223,167,69,0.18)] bg-[rgba(223,167,69,0.08)] px-3 py-1 text-xs text-[var(--lale-gold)]">
-                    {review.service}
+                    {t(review.service)}
                   </span>
-                  <span className="text-xs text-[var(--dream-text)]">BEYVIP müşteri yorumu</span>
+                  <span className="text-xs text-[var(--dream-text)]">{t('BEYVIP müşteri yorumu')}</span>
                 </div>
               </motion.article>
             ))}

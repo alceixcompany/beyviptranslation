@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { FiArrowRight } from 'react-icons/fi';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { useLanguage } from '@/components/LanguageProvider';
 
 interface Haber {
   id: string;
@@ -37,6 +38,7 @@ const createSlug = (title: string): string => {
 };
 
 const News = () => {
+  const { t } = useLanguage();
   const [haberler, setHaberler] = useState<Haber[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -70,7 +72,7 @@ const News = () => {
           <div className="flex flex-col items-center justify-center text-center">
             <div className="h-12 w-12 animate-spin rounded-full border-4 border-[var(--lale-gold)] border-t-transparent" />
             <p className="mt-4 text-sm tracking-[0.16em] text-[var(--dream-dark)]">
-              GÜNCEL İÇERİKLER HAZIRLANIYOR
+              {t('GÜNCEL İÇERİKLER HAZIRLANIYOR')}
             </p>
           </div>
         </div>
@@ -88,16 +90,15 @@ const News = () => {
     <section className="lale-light-section py-24 sm:py-28">
       <div className="relative mx-auto max-w-7xl px-5 sm:px-7 lg:px-10">
         <div className="mx-auto max-w-3xl text-center">
-          <div className="lale-kicker">Blog</div>
+          <div className="lale-kicker">{t('Blog')}</div>
 
           <h2 className="mt-6 font-serif text-3xl leading-tight text-[var(--dream-dark)] sm:text-4xl">
-            Tercüme süreçlerinde işinizi kolaylaştıran
-            <span className="block text-[var(--lale-gold)]">kısa rehberler ve notlar</span>
+            {t('Tercüme süreçlerinde işinizi kolaylaştıran')}
+            <span className="block text-[var(--lale-gold)]">{t('kısa rehberler ve notlar')}</span>
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[var(--dream-text)] sm:text-base">
-            Pasaport, vize, noter onayı ve resmi evrak hazırlığında sık sorulan
-            konuları anlaşılır şekilde derliyoruz.
+            {t('Pasaport, vize, noter onayı ve resmi evrak hazırlığında sık sorulan konuları anlaşılır şekilde derliyoruz.')}
           </p>
         </div>
 
@@ -120,7 +121,7 @@ const News = () => {
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#6f5a3b]/38 to-transparent" />
                 <div className="absolute left-6 top-6 rounded-full border border-[rgba(223,167,69,0.24)] bg-white/84 px-4 py-2 text-xs font-medium tracking-[0.16em] text-[var(--dream-dark)] backdrop-blur">
-                  ÖNE ÇIKAN YAZI
+                  {t('ÖNE ÇIKAN YAZI')}
                 </div>
               </div>
 
@@ -160,7 +161,7 @@ const News = () => {
 
                 <div className="mt-8">
                   <Link href={`/haberler/${createSlug(featuredNews.title)}`} className="lale-gold-button gap-3">
-                    Yazıyı Oku
+                    {t('Yazıyı Oku')}
                     <FiArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
@@ -210,7 +211,7 @@ const News = () => {
                       href={`/haberler/${createSlug(haber.title)}`}
                       className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-[var(--lale-gold)] transition-colors hover:text-[var(--lale-gold-soft)]"
                     >
-                      Devamını Oku
+                      {t('Devamını Oku')}
                       <FiArrowRight className="h-4 w-4" />
                     </Link>
                   </div>
@@ -225,7 +226,7 @@ const News = () => {
             href="/haberler"
             className="inline-flex items-center justify-center rounded-full border border-[rgba(95,89,108,0.18)] px-6 py-3 text-sm font-medium text-[var(--dream-dark)] transition-all duration-300 hover:bg-white/70"
           >
-            Tüm İçerikleri Gör
+            {t('Tüm İçerikleri Gör')}
           </Link>
         </div>
       </div>

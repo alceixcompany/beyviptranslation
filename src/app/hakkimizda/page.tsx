@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FiArrowRight, FiCheckCircle, FiClock, FiFileText, FiGlobe, FiShield } from 'react-icons/fi';
 import PageHero from '@/components/PageHero';
+import CountryFlagSlider from '@/components/CountryFlagSlider';
 import { createSeoMetadata } from '@/lib/seo';
 
 export const metadata = createSeoMetadata({
@@ -70,6 +71,8 @@ const AboutPage = () => {
           </div>
         </div>
       </section>
+
+      <CountryFlagSlider />
 
       <section className="lale-light-section py-20 sm:py-24">
         <div className="relative mx-auto max-w-7xl px-5 sm:px-7 lg:px-10">

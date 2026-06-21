@@ -21,7 +21,7 @@ const Footer = () => {
           <div className="grid gap-10 lg:grid-cols-[1.05fr_0.78fr_1.22fr_1fr] lg:gap-12">
             <div>
               <Link href="/" className="inline-flex">
-                <Image src="/beyvip/logo.svg" alt="BEYVIP Translation Office" width={176} height={48} className="h-12 w-auto" />
+                <Image src="/beyvip/logo-horizontal-transparent-v2.png" alt="BEYVIP Translation Office" width={224} height={60} className="h-14 w-auto mix-blend-multiply" />
               </Link>
               <p className="mt-6 max-w-sm text-sm leading-7 text-[var(--dream-text)]">
                 Pasaport, vize, ikamet, diploma, sözleşme ve resmi evraklar için

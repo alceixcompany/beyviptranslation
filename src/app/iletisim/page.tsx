@@ -43,7 +43,7 @@ const ContactPage = () => {
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="rounded-[18px] border border-[rgba(195,149,58,0.18)] bg-[#111] p-6 text-white shadow-[0_28px_80px_rgba(17,17,17,0.18)] sm:p-8 lg:p-10"
+            className="rounded-[18px] border border-[rgba(195,149,58,0.24)] bg-[linear-gradient(145deg,#121212_0%,#211d18_100%)] p-6 text-white shadow-[0_28px_80px_rgba(17,17,17,0.18)] sm:p-8 lg:p-10"
           >
             <h2 className="font-serif text-3xl sm:text-4xl">Mesaj Gönderin</h2>
             <p className="mt-3 text-sm leading-7 text-white/68">
@@ -59,12 +59,12 @@ const ContactPage = () => {
 
             <form onSubmit={handleSubmit} className="mt-8 space-y-5">
               <div className="grid gap-5 sm:grid-cols-2">
-                <input required name="name" className="rounded-full border border-white/14 bg-white/8 px-5 py-4 text-sm outline-none transition focus:border-[var(--lale-gold)]" placeholder="Ad Soyad" />
-                <input required name="phone" type="tel" className="rounded-full border border-white/14 bg-white/8 px-5 py-4 text-sm outline-none transition focus:border-[var(--lale-gold)]" placeholder="Telefon" />
+                <input required name="name" className="rounded-full border border-white/12 bg-white/94 px-5 py-4 text-sm text-[var(--dream-dark)] outline-none transition placeholder:text-[rgba(109,102,93,0.58)] focus:border-[var(--lale-gold)]" placeholder="Ad Soyad" />
+                <input required name="phone" type="tel" className="rounded-full border border-white/12 bg-white/94 px-5 py-4 text-sm text-[var(--dream-dark)] outline-none transition placeholder:text-[rgba(109,102,93,0.58)] focus:border-[var(--lale-gold)]" placeholder="Telefon" />
               </div>
-              <input required name="email" type="email" className="w-full rounded-full border border-white/14 bg-white/8 px-5 py-4 text-sm outline-none transition focus:border-[var(--lale-gold)]" placeholder="E-posta" />
+              <input required name="email" type="email" className="w-full rounded-full border border-white/12 bg-white/94 px-5 py-4 text-sm text-[var(--dream-dark)] outline-none transition placeholder:text-[rgba(109,102,93,0.58)] focus:border-[var(--lale-gold)]" placeholder="E-posta" />
               <div className="relative">
-                <select required name="service" className="w-full appearance-none rounded-full border border-white/14 bg-white/8 px-5 py-4 pr-12 text-sm outline-none transition focus:border-[var(--lale-gold)]">
+                <select required name="service" className="w-full appearance-none rounded-full border border-white/12 bg-white/94 px-5 py-4 pr-12 text-sm text-[var(--dream-dark)] outline-none transition focus:border-[var(--lale-gold)]">
                   <option value="" className="bg-[#111]">Hizmet seçiniz</option>
                   {serviceOptions.map((option) => (
                     <option key={option} value={option} className="bg-[#111]">{option}</option>
@@ -72,7 +72,7 @@ const ContactPage = () => {
                 </select>
                 <FiChevronDown className="pointer-events-none absolute right-5 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--lale-gold)]" />
               </div>
-              <textarea required name="message" rows={6} className="w-full resize-none rounded-[18px] border border-white/14 bg-white/8 px-5 py-4 text-sm outline-none transition focus:border-[var(--lale-gold)]" placeholder="Belge türü, hedef dil, teslim beklentisi..." />
+              <textarea required name="message" rows={6} className="w-full resize-none rounded-[18px] border border-white/12 bg-white/94 px-5 py-4 text-sm text-[var(--dream-dark)] outline-none transition placeholder:text-[rgba(109,102,93,0.58)] focus:border-[var(--lale-gold)]" placeholder="Belge türü, hedef dil, teslim beklentisi..." />
               <button type="submit" className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[var(--lale-gold)] px-6 py-4 text-sm font-semibold text-black transition hover:bg-[var(--lale-gold-soft)]">
                 <FiSend className="h-4 w-4" />
                 MESAJ GÖNDER

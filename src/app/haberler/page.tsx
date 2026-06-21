@@ -232,13 +232,13 @@ const NewsPage = () => {
         </div>
       </section>
 
-      <section className="lale-dark-section pb-24 px-5">
-        <div className="max-w-4xl mx-auto relative overflow-hidden rounded-[28px] lale-card-dark">
-          <div className="absolute top-0 right-0 w-48 h-48 bg-[rgba(212,175,55,0.08)] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+      <section className="lale-light-section px-5 pb-24">
+        <div className="relative mx-auto max-w-4xl overflow-hidden rounded-[22px] border border-[rgba(195,149,58,0.18)] bg-[linear-gradient(135deg,#171717_0%,#262018_48%,#f8efe0_49%,#fffaf0_100%)] shadow-[0_28px_80px_rgba(17,17,17,0.14)]">
+          <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(195,149,58,0.82),transparent)]" />
           
           <div className="relative grid lg:grid-cols-2 gap-8 p-8 sm:p-12 items-center">
             <div>
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-[rgba(212,175,55,0.10)] rounded-xl text-[var(--lale-gold)] mb-6">
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-[rgba(195,149,58,0.28)] bg-white/8 text-[var(--lale-gold)] mb-6">
                 <FiMail className="w-5 h-5" />
               </div>
               <h3 className="font-serif text-2xl sm:text-3xl text-[var(--lale-ivory)] mb-3">
@@ -257,14 +257,14 @@ const NewsPage = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="E-posta adresiniz"
                   required
-                  className="w-full px-6 py-4 bg-[rgba(251,250,246,0.06)] border border-[rgba(212,175,55,0.18)] rounded-full focus:outline-none focus:border-[var(--lale-gold)] transition-all text-[var(--lale-ivory)] text-sm"
+                  className="w-full rounded-full border border-[rgba(195,149,58,0.20)] bg-white/92 px-6 py-4 text-sm text-[var(--dream-dark)] placeholder:text-[rgba(109,102,93,0.58)] transition-all focus:border-[var(--lale-gold)] focus:outline-none"
                   disabled={isSubscribing}
                 />
               </div>
               <button 
                 type="submit"
                 disabled={isSubscribing}
-                className="w-full bg-[var(--lale-gold)] text-[var(--lale-emerald-deep)] py-4 rounded-full font-bold tracking-[0.15em] text-xs hover:bg-[var(--lale-gold-soft)] transition-all shadow-[0_15px_30px_rgba(212,175,55,0.12)] active:scale-[0.98]"
+                className="w-full rounded-full bg-[var(--lale-gold)] py-4 text-xs font-bold tracking-[0.15em] text-black shadow-[0_15px_30px_rgba(195,149,58,0.16)] transition-all hover:bg-[var(--lale-gold-soft)] active:scale-[0.98]"
               >
                 {isSubscribing ? 'KAYDEDİLİYOR...' : 'ŞİMDİ KAYDOL'}
               </button>

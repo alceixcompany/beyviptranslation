@@ -7,6 +7,7 @@ import References from '@/components/References';
 import FAQ from '@/components/FAQ';
 import Contact from '@/components/Contact';
 import JsonLd from '@/components/JsonLd';
+import CountryFlagSlider from '@/components/CountryFlagSlider';
 import { localBusinessJsonLd, websiteJsonLd } from '@/lib/seo';
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
     <main className="home-flow min-h-screen">
       <JsonLd data={[localBusinessJsonLd(), websiteJsonLd()]} />
       <Hero />
+      <CountryFlagSlider compact />
       <WhyChooseUs />
       <Services />
       <Gallery />

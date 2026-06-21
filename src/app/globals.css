@@ -248,6 +248,19 @@
     animation: dream-float 5.8s ease-in-out infinite;
   }
 
+  .country-flag-track {
+    animation: country-flag-marquee 34s linear infinite;
+  }
+
+  .country-flag-track-reverse {
+    animation-direction: reverse;
+    animation-duration: 40s;
+  }
+
+  .country-flag-track:hover {
+    animation-play-state: paused;
+  }
+
   @keyframes dream-spin {
     to {
       transform: rotate(360deg);
@@ -260,6 +273,15 @@
     }
     50% {
       transform: translateY(-14px);
+    }
+  }
+
+  @keyframes country-flag-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
     }
   }
 

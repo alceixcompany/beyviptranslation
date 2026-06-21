@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FiArrowUpRight, FiCheck } from 'react-icons/fi';
+import { useLanguage } from '@/components/LanguageProvider';
 
 const services = [
   {
@@ -39,6 +40,8 @@ const services = [
 ] as const;
 
 const Services = () => {
+  const { t } = useLanguage();
+
   return (
     <section id="hizmetler" className="relative overflow-hidden bg-[var(--lale-cream)] py-20 sm:py-24">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(223,167,69,0.32),transparent)]" />
@@ -46,14 +49,13 @@ const Services = () => {
       <div className="relative mx-auto max-w-7xl px-5 sm:px-7 lg:px-10">
         <div className="grid gap-8 lg:grid-cols-[0.86fr_1.14fr] lg:items-end">
           <div>
-            <div className="lale-kicker">Hizmetlerimiz</div>
+            <div className="lale-kicker">{t('Hizmetlerimiz')}</div>
             <h2 className="mt-5 max-w-2xl font-serif text-3xl font-normal leading-tight tracking-[-0.02em] text-[var(--lale-emerald-deep)] sm:text-4xl lg:text-5xl">
-              BEYVIP resmi ve özel belge tercüme hizmetleri
+              {t('BEYVIP resmi ve özel belge tercüme hizmetleri')}
             </h2>
           </div>
           <p className="max-w-2xl text-sm leading-7 text-[var(--dream-text)] sm:text-base">
-            Başvuru tipinize göre belgeyi inceliyor, tercüme formatını netleştiriyor
-            ve teslim sürecini hızlıca planlıyoruz.
+            {t('Başvuru tipinize göre belgeyi inceliyor, tercüme formatını netleştiriyor ve teslim sürecini hızlıca planlıyoruz.')}
           </p>
         </div>
 
@@ -88,8 +90,8 @@ const Services = () => {
                     <FiArrowUpRight className="h-5 w-5" />
                   </Link>
                 </div>
-                <h3 className="font-serif text-2xl font-normal">{service.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-white/76">{service.description}</p>
+                <h3 className="font-serif text-2xl font-normal">{t(service.title)}</h3>
+                <p className="mt-3 text-sm leading-7 text-white/76">{t(service.description)}</p>
               </div>
             </motion.article>
           ))}
@@ -100,12 +102,12 @@ const Services = () => {
             {['Accepted worldwide', 'Accurate details', 'Fast turnaround'].map((item) => (
               <span key={item} className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm">
                 <FiCheck className="h-4 w-4" />
-                {item}
+                {t(item)}
               </span>
             ))}
           </div>
           <Link href="/iletisim" className="lale-gold-button gap-3 justify-self-start md:justify-self-end">
-            Teklif Al
+            {t('Teklif Al')}
             <FiArrowUpRight className="h-4 w-4" />
           </Link>
         </div>

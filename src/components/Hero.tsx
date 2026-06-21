@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { FiArrowUpRight, FiGlobe, FiInstagram, FiMapPin, FiPhone } from 'react-icons/fi';
 import { siteConfig } from '@/lib/seo';
+import { useLanguage } from '@/components/LanguageProvider';
 
 const heroItems = ['Yeminli Tercüme', 'Noter Onayı', 'Pasaport Çevirisi'];
 
@@ -27,6 +28,8 @@ const group: Variants = {
 };
 
 const Hero = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="relative isolate overflow-hidden bg-[#f7f1e5] px-4 pb-8 pt-24 sm:px-6 lg:px-8">
       <div className="absolute inset-0">
@@ -52,31 +55,30 @@ const Hero = () => {
           >
             <motion.div variants={reveal} className="mb-5 inline-flex items-center gap-2 rounded-full border border-[rgba(195,149,58,0.28)] bg-white/72 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--lale-gold)] backdrop-blur">
               <FiGlobe className="h-4 w-4" />
-              Worldwide Accepted Translation
+              {t('Dünya genelinde kabul gören tercüme')}
             </motion.div>
 
             <motion.h1
               variants={reveal}
               className="max-w-[580px] font-serif text-[42px] font-normal leading-[1.04] text-[var(--dream-dark)] sm:text-[58px] lg:text-[66px]"
             >
-              BEYVIP Translation Office
+              {t('BEYVIP Tercüme Ofisi')}
             </motion.h1>
 
             <motion.p
               variants={reveal}
               className="mt-5 max-w-[540px] text-base leading-8 text-[var(--dream-text)] sm:text-lg"
             >
-              Pasaport, vize, ikamet ve resmi evrak süreçleri için hızlı,
-              dikkatli ve kabul odaklı tercüme çözümleri.
+              {t('Pasaport, vize, ikamet ve resmi evrak süreçleri için hızlı, dikkatli ve kabul odaklı tercüme çözümleri.')}
             </motion.p>
 
             <motion.div variants={reveal} className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/hizmetlerimiz" className="inline-flex items-center justify-center gap-3 rounded-full bg-[var(--dream-dark)] px-6 py-3 text-sm font-medium text-white shadow-[0_18px_42px_rgba(95,89,108,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--brand-panel-deep)]">
-                Hizmetleri İncele
+                {t('Hizmetleri İncele')}
                 <FiArrowUpRight className="h-4 w-4" />
               </Link>
               <Link href="/iletisim" className="inline-flex items-center justify-center gap-3 rounded-full border border-[rgba(95,89,108,0.18)] bg-white/72 px-6 py-3 text-sm font-medium text-[var(--dream-dark)] shadow-[0_14px_32px_rgba(95,89,108,0.08)] backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:bg-white">
-                Teklif Al
+                {t('Teklif Al')}
                 <FiPhone className="h-4 w-4" />
               </Link>
             </motion.div>
@@ -87,7 +89,7 @@ const Hero = () => {
                   key={service}
                   className="rounded-[14px] border border-[rgba(195,149,58,0.20)] bg-white/70 px-4 py-3 text-sm text-[var(--dream-dark)] shadow-[0_10px_24px_rgba(17,17,17,0.05)] backdrop-blur"
                 >
-                  {service}
+                  {t(service)}
                 </span>
               ))}
             </motion.div>
@@ -114,9 +116,9 @@ const Hero = () => {
 
         <div className="relative z-20 grid gap-3 rounded-[18px] border border-[rgba(195,149,58,0.16)] bg-white/74 px-3 py-3 shadow-[0_16px_44px_rgba(17,17,17,0.06)] backdrop-blur md:grid-cols-3 md:px-5">
             {[
-            { icon: FiInstagram, title: 'İletişim', value: siteConfig.instagramHandle },
-            { icon: FiMapPin, title: 'Konum', value: 'İstanbul / Türkiye' },
-            { icon: FiPhone, title: 'Telefon', value: siteConfig.phoneDisplay },
+            { icon: FiInstagram, title: t('İletişim'), value: siteConfig.instagramHandle },
+            { icon: FiMapPin, title: t('Konum'), value: t('İstanbul / Türkiye') },
+            { icon: FiPhone, title: t('Telefon'), value: siteConfig.phoneDisplay },
           ].map((detail, index) => {
             const Icon = detail.icon;
 

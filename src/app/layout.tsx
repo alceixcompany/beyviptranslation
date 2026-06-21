@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 import ReduxProvider from "@/components/ReduxProvider";
+import { LanguageProvider } from "@/components/LanguageProvider";
 import { absoluteUrl, serviceKeywords, siteConfig } from "@/lib/seo";
 
 const dmSans = DM_Sans({ 
@@ -66,11 +67,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/beyvip/logo.svg', sizes: 'any', type: 'image/svg+xml' },
+      { url: '/beyvip/favicon.png', sizes: '512x512', type: 'image/png' },
+      { url: '/browser_icon.png', sizes: '512x512', type: 'image/png' },
     ],
-    shortcut: '/beyvip/logo.svg',
+    shortcut: '/beyvip/favicon.png',
     apple: [
-      { url: '/beyvip/logo.svg', sizes: '180x180', type: 'image/svg+xml' },
+      { url: '/beyvip/favicon.png', sizes: '180x180', type: 'image/png' },
     ],
   },
   openGraph: {
@@ -111,7 +113,9 @@ export default function RootLayout({
     <html lang="tr">
       <body className={`${dmSans.variable} ${marcellus.variable} ${dancingScript.variable} font-sans`}>
         <ReduxProvider>
-          <RootLayoutContent>{children}</RootLayoutContent>
+          <LanguageProvider>
+            <RootLayoutContent>{children}</RootLayoutContent>
+          </LanguageProvider>
         </ReduxProvider>
       </body>
     </html>

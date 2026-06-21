@@ -26,7 +26,7 @@ export const siteConfig = {
     longitude: 28.9784,
   },
   defaultImage: "/beyvip/hero.png",
-  logo: "/beyvip/logo.svg",
+  logo: "/beyvip/logo-horizontal-transparent-v2.png",
 };
 
 export const serviceKeywords = [
