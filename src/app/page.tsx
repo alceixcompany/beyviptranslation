@@ -8,6 +8,7 @@ import FAQ from '@/components/FAQ';
 import Contact from '@/components/Contact';
 import JsonLd from '@/components/JsonLd';
 import CountryFlagSlider from '@/components/CountryFlagSlider';
+import ServicePerks from '@/components/ServicePerks';
 import { localBusinessJsonLd, websiteJsonLd } from '@/lib/seo';
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
       <CountryFlagSlider compact />
       <WhyChooseUs />
       <Services />
+      <ServicePerks />
       <Gallery />
       <References />
       <FAQ />

@@ -452,13 +452,90 @@ export const translations: TranslationMap = {
   'Vize ve ikamet dosyaları': { en: 'Visa and residence files', ar: 'ملفات التأشيرة والإقامة', ru: 'Визовые и резидентские документы', fa: 'پرونده‌های ویزا ve اقامت', fr: 'Dossiers de visa et de séjour', de: 'Visa- und Aufenthaltsunterlagen' },
   'Hızlı belge inceleme': { en: 'Fast document review', ar: 'مراجعة سريعة للوثائق', ru: 'Быстрая проверка документов', fa: 'بررسی سریع مدرک', fr: 'Examen rapide des documents', de: 'Schnelle Dokumentenprüfung' },
   'Resmi başvuruya uygun teslim': { en: 'Delivery suitable for official applications', ar: 'تسليم مناسب للطلبات الرسمية', ru: 'Сдача в соответствии с официальными требованиями', fa: 'تحویل متناسب با درخواست resmi', fr: 'Livraison conforme aux démarches officielles', de: 'Offiziellen Anträgen entsprechende Lieferung' },
+
+  // Page hero and gallery/card fallbacks
+  'Tercüme Rehberi': { en: 'Translation Guide', ar: 'دليل الترجمة', ru: 'Руководство по переводу', fa: 'راهنمای ترجمه', fr: 'Guide de traduction', de: 'Übersetzungsleitfaden' },
+  'Haberler & duyurular': { en: 'News & announcements', ar: 'الأخبار والإعلانات', ru: 'Новости и объявления', fa: 'اخبار و اطلاعیه‌ها', fr: 'Actualités et annonces', de: 'Nachrichten und Ankündigungen' },
+  'duyurular': { en: 'announcements', ar: 'الإعلانات', ru: 'объявления', fa: 'اطلاعیه‌ها', fr: 'annonces', de: 'Ankündigungen' },
+  'Resmi evrak, vize, pasaport ve noter onaylı tercüme süreçleriyle ilgili kısa rehberleri takip edin.': {
+    en: 'Follow short guides about official documents, visas, passports and notarized translation processes.',
+    ar: 'تابعوا أدلة قصيرة حول الوثائق الرسمية والتأشيرات والجوازات وإجراءات الترجمة الموثقة.',
+    ru: 'Следите за краткими руководствами по официальным документам, визам, паспортам и нотариальным переводам.',
+    fa: 'راهنماهای کوتاه درباره اسناد رسمی، ویزا، پاسپورت و روند ترجمه محضری را دنبال کنید.',
+    fr: 'Suivez de courts guides sur les documents officiels, visas, passeports et traductions notariées.',
+    de: 'Lesen Sie kurze Leitfäden zu offiziellen Dokumenten, Visa, Pässen und notariellen Übersetzungen.'
+  },
+  'Belgeniz için': { en: 'For your document', ar: 'لوثيقتكم', ru: 'Для вашего документа', fa: 'برای سند شما', fr: 'Pour votre document', de: 'Für Ihr Dokument' },
+  'teklif alın': { en: 'get a quote', ar: 'احصلوا على عرض', ru: 'получите расчет', fa: 'پیشنهاد بگیرید', fr: 'demandez un devis', de: 'Angebot erhalten' },
+  'Belge türünü, hedef dili ve teslim beklentinizi paylaşın; size hızlıca dönüş yapalım.': {
+    en: 'Share the document type, target language and delivery expectation; we will get back to you quickly.',
+    ar: 'شاركوا نوع الوثيقة واللغة المطلوبة وتوقع التسليم؛ سنعود إليكم بسرعة.',
+    ru: 'Укажите тип документа, целевой язык и ожидаемый срок; мы быстро свяжемся с вами.',
+    fa: 'نوع سند، زبان مقصد و انتظار تحویل را ارسال کنید؛ سریع با شما تماس می‌گیریم.',
+    fr: 'Indiquez le type de document, la langue cible et le délai souhaité ; nous vous répondrons rapidement.',
+    de: 'Teilen Sie Dokumenttyp, Zielsprache und Lieferwunsch mit; wir melden uns schnell bei Ihnen.'
+  },
+  'Belgenizin kullanım amacını netleştirir, hedef dili ve onay ihtiyacını değerlendirir, teslim planını baştan paylaşırız.': {
+    en: 'We clarify the purpose of your document, assess the target language and approval needs, and share the delivery plan from the start.',
+    ar: 'نوضح غرض استخدام وثيقتكم ونقيّم اللغة المطلوبة والحاجة إلى التصديق، ونشارك خطة التسليم منذ البداية.',
+    ru: 'Мы уточняем цель использования документа, целевой язык и необходимость заверения, а также заранее сообщаем план сдачи.',
+    fa: 'هدف استفاده از سند، زبان مقصد و نیاز به تأیید را مشخص می‌کنیم و برنامه تحویل را از ابتدا اعلام می‌کنیم.',
+    fr: 'Nous clarifions l’usage de votre document, évaluons la langue cible et les besoins de validation, puis partageons le plan de livraison dès le départ.',
+    de: 'Wir klären den Verwendungszweck, die Zielsprache und den Beglaubigungsbedarf und teilen den Lieferplan von Anfang an mit.'
+  },
+  'BEYVIP Çalışma Alanı': { en: 'BEYVIP Workspace', ar: 'مساحة عمل BEYVIP', ru: 'Рабочая зона BEYVIP', fa: 'فضای کاری BEYVIP', fr: 'Espace de travail BEYVIP', de: 'BEYVIP Arbeitsbereich' },
+  'Vize & İkamet': { en: 'Visa & Residence', ar: 'التأشيرة والإقامة', ru: 'Виза и ВНЖ', fa: 'ویزا و اقامت', fr: 'Visa et séjour', de: 'Visa und Aufenthalt' },
+  'Resmi Evrak': { en: 'Official Document', ar: 'وثيقة رسمية', ru: 'Официальный документ', fa: 'سند رسمی', fr: 'Document officiel', de: 'Offizielles Dokument' },
+  'Vize, ikamet ve resmi başvurular için pasaport çevirisi hazırlığı.': {
+    en: 'Passport translation preparation for visa, residence and official applications.',
+    ar: 'تحضير ترجمة جواز السفر للتأشيرة والإقامة والطلبات الرسمية.',
+    ru: 'Подготовка перевода паспорта для виз, ВНЖ и официальных заявлений.',
+    fa: 'آماده‌سازی ترجمه پاسپورت برای ویزا، اقامت و درخواست‌های رسمی.',
+    fr: 'Préparation de traduction de passeport pour les visas, séjours et démarches officielles.',
+    de: 'Vorbereitung der Passübersetzung für Visa, Aufenthalt und offizielle Anträge.'
+  },
+  'Noter onayına uygun resmi belge tercümesi ve teslim süreci.': {
+    en: 'Official document translation and delivery process suitable for notary approval.',
+    ar: 'ترجمة وثائق رسمية وعملية تسليم مناسبة لتصديق كاتب العدل.',
+    ru: 'Перевод официальных документов и процесс сдачи для нотариального заверения.',
+    fa: 'ترجمه سند رسمی و روند تحویل مناسب برای تأیید دفترخانه.',
+    fr: 'Traduction de document officiel et processus de livraison adaptés à la validation notariale.',
+    de: 'Übersetzung offizieller Dokumente und Lieferung passend zur notariellen Beglaubigung.'
+  },
+  'Belgeleriniz düzenli ve kontrollü şekilde hazırlandığı profesyonel çalışma ortamı.': {
+    en: 'A professional workspace where your documents are prepared in an organized and controlled way.',
+    ar: 'بيئة عمل احترافية تُحضّر فيها وثائقكم بشكل منظم وتحت المتابعة.',
+    ru: 'Профессиональная рабочая среда, где документы готовятся организованно и под контролем.',
+    fa: 'فضای کاری حرفه‌ای که اسناد شما به‌صورت منظم و کنترل‌شده آماده می‌شود.',
+    fr: 'Un environnement professionnel où vos documents sont préparés de façon organisée et contrôlée.',
+    de: 'Ein professionelles Arbeitsumfeld, in dem Ihre Dokumente strukturiert und kontrolliert vorbereitet werden.'
+  },
+  'Kargo Teslim': { en: 'Courier Delivery', ar: 'تسليم بالشحن', ru: 'Доставка курьером', fa: 'تحویل با پیک', fr: 'Livraison par courrier', de: 'Kurierlieferung' },
+  'Online Çeviri Hizmeti': { en: 'Online Translation Service', ar: 'خدمة ترجمة عبر الإنترنت', ru: 'Онлайн-услуга перевода', fa: 'خدمات ترجمه آنلاین', fr: 'Service de traduction en ligne', de: 'Online-Übersetzungsservice' },
+  'Uygun Fiyat Garantisi': { en: 'Fair Price Guarantee', ar: 'ضمان السعر المناسب', ru: 'Гарантия выгодной цены', fa: 'تضمین قیمت مناسب', fr: 'Garantie de prix avantageux', de: 'Faire-Preis-Garantie' },
+  'Menüyü aç/kapat': { en: 'Toggle menu', ar: 'فتح/إغلاق القائمة', ru: 'Открыть/закрыть меню', fa: 'باز/بستن منو', fr: 'Ouvrir/fermer le menu', de: 'Menü öffnen/schließen' },
+  'Menüyü kapat': { en: 'Close menu', ar: 'إغلاق القائمة', ru: 'Закрыть меню', fa: 'بستن منو', fr: 'Fermer le menu', de: 'Menü schließen' },
 };
 
 export function isLocale(value: string | null | undefined): value is Locale {
   return Boolean(value && (locales as readonly string[]).includes(value));
 }
 
+const reverseTranslations = new Map<string, string>();
+
+Object.entries(translations).forEach(([source, localeValues]) => {
+  reverseTranslations.set(source, source);
+  Object.values(localeValues).forEach((translated) => {
+    if (translated) reverseTranslations.set(translated, source);
+  });
+});
+
+export function getTranslationSource(value: string) {
+  return reverseTranslations.get(value) || value;
+}
+
 export function translate(value: string, locale: Locale) {
-  if (locale === 'tr') return value;
-  return translations[value]?.[locale] || value;
+  const source = getTranslationSource(value);
+  if (locale === 'tr') return source;
+  return translations[source]?.[locale] || source;
 }

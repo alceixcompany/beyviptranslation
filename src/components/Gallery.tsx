@@ -5,6 +5,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FiArrowRight } from 'react-icons/fi';
+import { useLanguage } from '@/components/LanguageProvider';
 
 interface GalleryCategory {
   id: string;
@@ -30,6 +31,7 @@ interface GalleryItem {
 }
 
 const Gallery = () => {
+  const { t } = useLanguage();
   const [categories, setCategories] = useState<GalleryCategory[]>([]);
   const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -70,7 +72,7 @@ const Gallery = () => {
         <div className="mx-auto max-w-6xl px-4 pt-[10px]">
           <div className="text-center">
             <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-[var(--lale-gold)] border-t-transparent" />
-            <p className="text-[var(--dream-text)]">Galeri yükleniyor...</p>
+            <p className="text-[var(--dream-text)]">{t('Galeri yükleniyor...')}</p>
           </div>
         </div>
       </section>
@@ -85,15 +87,15 @@ const Gallery = () => {
     <section className="lale-light-section py-24 sm:py-28">
       <div className="relative mx-auto max-w-7xl px-5 sm:px-7 lg:px-10">
         <div className="mb-16 pt-[10px] text-center">
-          <div className="lale-kicker mb-8">Galeri</div>
+          <div className="lale-kicker mb-8">{t('Galeri')}</div>
 
           <h2 className="font-serif text-3xl leading-tight text-[var(--dream-dark)] sm:text-4xl">
-            Resmi evrak süreçlerinden
-            <span className="block text-[var(--lale-gold)]">seçilen çalışma alanları</span>
+            {t('Resmi evrak süreçlerinden')}
+            <span className="block text-[var(--lale-gold)]">{t('seçilen çalışma alanları')}</span>
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[var(--dream-text)] sm:text-base">
-            Pasaport, noter onayı ve resmi belge tercümesi için hazırlanan çalışma görselleri.
+            {t('Pasaport, noter onayı ve resmi belge tercümesi için hazırlanan çalışma görselleri.')}
           </p>
         </div>
 
@@ -120,27 +122,26 @@ const Gallery = () => {
 
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(95,89,108,0.04),rgba(95,89,108,0.42))]" />
                 <div className="absolute left-6 top-6 rounded-full border border-[rgba(223,167,69,0.24)] bg-white/84 px-4 py-2 text-xs font-medium tracking-[0.14em] text-[var(--dream-dark)] backdrop-blur">
-                  {getCategoryName(item.categoryId)}
+                  {t(getCategoryName(item.categoryId))}
                 </div>
               </div>
 
               <div className="p-8">
                 <h3 className="mb-3 font-serif text-xl text-[var(--dream-dark)] transition-colors duration-300 group-hover:text-[var(--lale-gold)]">
-                  {item.title}
+                  {t(item.title)}
                 </h3>
 
                 {item.description && (
-                  <div
-                    className="line-clamp-2 text-sm leading-7 text-[var(--dream-text)]"
-                    dangerouslySetInnerHTML={{ __html: item.description }}
-                  />
+                  <p className="line-clamp-2 text-sm leading-7 text-[var(--dream-text)]">
+                    {t(item.description.replace(/<[^>]*>/g, ''))}
+                  </p>
                 )}
 
                 <Link
                   href="/galeri"
                   className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[var(--lale-gold)] transition-colors hover:text-[var(--lale-gold-soft)]"
                 >
-                  Detayları Görüntüle
+                  {t('Detayları Görüntüle')}
                   <FiArrowRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -153,7 +154,7 @@ const Gallery = () => {
             href="/galeri"
             className="inline-flex items-center justify-center rounded-full border border-[rgba(95,89,108,0.18)] px-6 py-3 text-sm font-medium text-[var(--dream-dark)] transition-all duration-300 hover:bg-white/70"
           >
-            Tüm Galeriyi Keşfedin
+            {t('Tüm Galeriyi Keşfedin')}
           </Link>
         </div>
       </div>

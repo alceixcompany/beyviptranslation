@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import { defaultLocale, isLocale, localeMeta, locales, type Locale, translate } from '@/lib/i18n';
+import { defaultLocale, getTranslationSource, isLocale, localeMeta, locales, type Locale, translate } from '@/lib/i18n';
 import { usePathname } from 'next/navigation';
 
 type LanguageContextValue = {
@@ -22,6 +22,10 @@ function normalizeText(value: string) {
   return value.replace(/\s+/g, ' ').trim();
 }
 
+function getOriginalText(value: string) {
+  return getTranslationSource(normalizeText(value));
+}
+
 function applyDomTranslations(locale: Locale) {
   if (typeof document === 'undefined') return;
 
@@ -40,7 +44,7 @@ function applyDomTranslations(locale: Locale) {
     const nodes: Text[] = [];
     while (walker.nextNode()) nodes.push(walker.currentNode as Text);
     nodes.forEach((node) => {
-      const original = textOriginals.get(node);
+      const original = getOriginalText(textOriginals.get(node) || node.textContent || '');
       if (original) node.textContent = original;
     });
 
@@ -49,6 +53,14 @@ function applyDomTranslations(locale: Locale) {
       if (originals) {
         Object.entries(originals).forEach(([attribute, value]) => element.setAttribute(attribute, value));
       }
+
+      TRANSLATABLE_ATTRIBUTES.forEach((attribute) => {
+        const current = element.getAttribute(attribute);
+        if (!current) return;
+
+        const original = getOriginalText(current);
+        if (original !== current) element.setAttribute(attribute, original);
+      });
     });
     return;
   }
@@ -57,7 +69,7 @@ function applyDomTranslations(locale: Locale) {
     acceptNode(node) {
       const parent = node.parentElement;
       if (!parent || parent.closest(SKIP_SELECTOR)) return NodeFilter.FILTER_REJECT;
-      const source = normalizeText(textOriginals.get(node as Text) || node.textContent || '');
+      const source = getOriginalText(textOriginals.get(node as Text) || node.textContent || '');
       if (!source || translate(source, locale) === source) return NodeFilter.FILTER_SKIP;
       return NodeFilter.FILTER_ACCEPT;
     },
@@ -72,7 +84,7 @@ function applyDomTranslations(locale: Locale) {
     const parent = node.parentElement;
     if (!parent) return;
 
-    const original = textOriginals.get(node) || normalizeText(node.textContent || '');
+    const original = getOriginalText(textOriginals.get(node) || node.textContent || '');
     const translated = translate(original, locale);
     if (translated === original) return;
 
@@ -89,7 +101,10 @@ function applyDomTranslations(locale: Locale) {
 
     TRANSLATABLE_ATTRIBUTES.forEach((attribute) => {
       const current = element.getAttribute(attribute);
-      const original = originalAttrs[attribute] || current;
+      const rawOriginal = originalAttrs[attribute] || current;
+      if (!rawOriginal) return;
+
+      const original = getOriginalText(rawOriginal);
       if (!original) return;
 
       const translated = translate(original, locale);

@@ -4,12 +4,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { createPortal } from 'react-dom';
-import { LanguageSelect } from '@/components/LanguageProvider';
+import { LanguageSelect, useLanguage } from '@/components/LanguageProvider';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const { t } = useLanguage();
   const isAdminPage = pathname?.startsWith('/admin') || false;
   const desktopLinkColor = 'text-[var(--dream-dark)]';
   const navItems = [
@@ -95,7 +96,7 @@ const Header = () => {
           <nav className="hidden lg:flex items-center space-x-1">
             {navItems.map((item) => (
               <Link key={item.href} href={item.href} className={`px-3 py-2 text-sm font-medium transition-all duration-300 hover:text-[var(--lale-gold)] ${desktopLinkColor}`}>
-                {item.label}
+                {t(item.label)}
               </Link>
             ))}
             <a
@@ -104,7 +105,7 @@ const Header = () => {
               rel="noopener noreferrer"
               className="ml-2 inline-flex items-center rounded-full bg-[var(--dream-dark)] px-5 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--lale-gold)]"
             >
-              WhatsApp
+              {t('WhatsApp')}
             </a>
             <div className="ml-2">
               <LanguageSelect />
@@ -119,7 +120,7 @@ const Header = () => {
                 : 'border-[rgba(223,167,69,0.24)] text-[var(--dream-dark)] hover:bg-[rgba(223,167,69,0.08)]'
             }`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle mobile menu"
+            aria-label={t('Menüyü aç/kapat')}
             aria-expanded={isMenuOpen}
           >
             <div className="w-6 h-6 flex flex-col justify-center items-center">
@@ -154,7 +155,7 @@ const Header = () => {
               <button
                 onClick={() => setIsMenuOpen(false)}
                 className="p-2 rounded-lg text-[var(--lale-gold)] hover:bg-[rgba(212,175,55,0.10)] transition-colors duration-200"
-                aria-label="Close mobile menu"
+                aria-label={t('Menüyü kapat')}
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -172,7 +173,7 @@ const Header = () => {
                     className="block border-b border-[rgba(212,175,55,0.16)] px-4 py-4 text-sm font-medium tracking-[0.12em] text-[var(--lale-ivory)] transition-colors duration-200 hover:text-[var(--lale-gold)]"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    {item.label}
+                    {t(item.label)}
                   </Link>
                 ))}
                 <a
@@ -181,7 +182,7 @@ const Header = () => {
                   rel="noopener noreferrer"
                   className="mt-6 block rounded-full bg-[var(--lale-gold)] px-5 py-4 text-center text-sm font-semibold tracking-[0.12em] text-black"
                 >
-                  WHATSAPP
+                  {t('WhatsApp')}
                 </a>
                 <div className="mt-5 px-4">
                   <LanguageSelect compact />
