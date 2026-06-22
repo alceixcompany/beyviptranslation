@@ -139,22 +139,26 @@ const Header = () => {
 
         {/* Mobile Menu Portal */}
         {isMenuOpen && typeof window !== 'undefined' && createPortal(
-          <div className="lg:hidden fixed inset-0 z-[9999] bg-[var(--lale-emerald-deep)] text-[var(--lale-ivory)]">
+          <div className="lg:hidden fixed inset-0 z-[9999] bg-[var(--lale-cream)] text-[var(--dream-dark)]">
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-[rgba(212,175,55,0.26)]">
-              <Link href="/" className="flex items-center" onClick={() => setIsMenuOpen(false)}>
+            <div className="flex items-center justify-between border-b border-[rgba(195,149,58,0.16)] bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(248,241,229,0.78))] px-6 py-5 shadow-[0_12px_34px_rgba(95,89,108,0.05)] backdrop-blur">
+              <Link
+                href="/"
+                className="flex h-16 items-center rounded-[18px] border border-[rgba(195,149,58,0.14)] bg-white/86 px-4 shadow-[0_16px_36px_rgba(95,89,108,0.08)] transition-transform duration-300 active:scale-[0.98]"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 <Image 
                   src="/beyvip/logo-horizontal-transparent-v2.png"
                   alt="BEYVIP Translation Office"
                   width={190}
                   height={51}
-                  className="h-12 w-auto rounded bg-white object-contain"
+                  className="h-11 w-auto object-contain"
                   priority
                 />
               </Link>
               <button
                 onClick={() => setIsMenuOpen(false)}
-                className="p-2 rounded-lg text-[var(--lale-gold)] hover:bg-[rgba(212,175,55,0.10)] transition-colors duration-200"
+                className="flex h-14 w-14 items-center justify-center rounded-full border border-[rgba(195,149,58,0.22)] bg-white/78 text-[var(--lale-gold)] shadow-[0_14px_30px_rgba(95,89,108,0.07)] transition-colors duration-200 hover:bg-[rgba(195,149,58,0.10)]"
                 aria-label={t('Menüyü kapat')}
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -165,12 +169,12 @@ const Header = () => {
             
             {/* Navigation */}
             <nav className="flex-1 overflow-y-auto py-6 px-6">
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {navItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="block border-b border-[rgba(212,175,55,0.16)] px-4 py-4 text-sm font-medium tracking-[0.12em] text-[var(--lale-ivory)] transition-colors duration-200 hover:text-[var(--lale-gold)]"
+                    className="block rounded-[14px] border border-[rgba(195,149,58,0.12)] bg-white/58 px-5 py-4 text-sm font-medium tracking-[0.10em] text-[var(--dream-dark)] shadow-[0_10px_26px_rgba(95,89,108,0.04)] transition-colors duration-200 hover:border-[rgba(195,149,58,0.24)] hover:bg-white/82 hover:text-[var(--lale-gold)]"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {t(item.label)}
@@ -180,11 +184,11 @@ const Header = () => {
                   href="https://wa.me/905330923476"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-6 block rounded-full bg-[var(--lale-gold)] px-5 py-4 text-center text-sm font-semibold tracking-[0.12em] text-black"
+                  className="mt-6 block rounded-full bg-[var(--dream-dark)] px-5 py-4 text-center text-sm font-semibold tracking-[0.10em] text-white shadow-[0_18px_42px_rgba(95,89,108,0.14)] transition-colors hover:bg-[var(--lale-gold)] hover:text-black"
                 >
                   {t('WhatsApp')}
                 </a>
-                <div className="mt-5 px-4">
+                <div className="mt-5 px-1">
                   <LanguageSelect compact />
                 </div>
               </div>
