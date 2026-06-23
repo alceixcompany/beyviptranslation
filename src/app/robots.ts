@@ -1,7 +1,9 @@
 import { MetadataRoute } from 'next'
-import { siteConfig } from '@/lib/seo'
+import { getRequestSiteConfig } from '@/lib/server-seo'
 
-export default function robots(): MetadataRoute.Robots {
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const siteConfig = await getRequestSiteConfig()
+
   return {
     rules: {
       userAgent: '*',

@@ -5,13 +5,20 @@ import { FiArrowRight, FiCheckCircle, FiClock, FiFileText, FiGlobe, FiShield } f
 import PageHero from '@/components/PageHero';
 import CountryFlagSlider from '@/components/CountryFlagSlider';
 import { createSeoMetadata } from '@/lib/seo';
+import { getRequestSiteConfig } from '@/lib/server-seo';
 
-export const metadata = createSeoMetadata({
-  title: 'Hakkımızda',
-  description: 'BEYVIP Translation Office resmi evrak, pasaport, vize, yeminli ve noter onaylı tercüme süreçlerinde profesyonel destek sunar.',
-  path: '/hakkimizda',
-  image: '/beyvip/about.png',
-});
+export async function generateMetadata() {
+  const site = await getRequestSiteConfig();
+
+  return createSeoMetadata({
+    title: `${site.locationName} Yeminli Tercüme Ofisi Hakkında`,
+    description: `${site.name}; resmi evrak, pasaport, vize, yeminli ve noter onaylı tercüme süreçlerinde profesyonel destek sunar.`,
+    path: '/hakkimizda',
+    image: '/beyvip/about.png',
+    keywords: [`${site.locationName.toLocaleLowerCase('tr-TR')} tercume ofisi`],
+    site,
+  });
+}
 
 const values = [
   { icon: FiShield, title: 'Güven', desc: 'Belgeleriniz gizlilik ve dikkatle ele alınır.' },

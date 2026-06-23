@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { FiArrowRight, FiCheckCircle } from 'react-icons/fi';
 import PageHero from '@/components/PageHero';
 import { createSeoMetadata } from '@/lib/seo';
+import { getRequestSiteConfig } from '@/lib/server-seo';
 
 const services = {
   'pasaport-tercumesi': {
@@ -56,21 +57,24 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const service = services[slug as keyof typeof services];
+  const site = await getRequestSiteConfig();
 
   if (!service) {
     return createSeoMetadata({
       title: 'Hizmet Bulunamadı',
-      description: 'BEYVIP Translation Office hizmet detayı bulunamadı.',
+      description: `${site.name} hizmet detayı bulunamadı.`,
       path: '/hizmetlerimiz',
+      site,
     });
   }
 
   return createSeoMetadata({
-    title: service.title,
-    description: service.description,
+    title: `${site.locationName} ${service.title}`,
+    description: `${site.locationName} ${service.title.toLocaleLowerCase('tr-TR')}: ${service.description}`,
     path: `/hizmetlerimiz/${slug}`,
     image: service.image,
-    keywords: [service.title.toLocaleLowerCase('tr-TR')],
+    keywords: [service.title.toLocaleLowerCase('tr-TR'), `${site.locationName.toLocaleLowerCase('tr-TR')} ${service.title.toLocaleLowerCase('tr-TR')}`],
+    site,
   });
 }
 

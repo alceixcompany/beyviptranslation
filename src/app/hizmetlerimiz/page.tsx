@@ -4,16 +4,22 @@ import Link from 'next/link';
 import { FiArrowRight, FiCheck, FiFileText, FiGlobe, FiShield } from 'react-icons/fi';
 import PageHero from '@/components/PageHero';
 import JsonLd from '@/components/JsonLd';
-import { absoluteUrl, createSeoMetadata, siteConfig } from '@/lib/seo';
+import { absoluteUrl, createSeoMetadata } from '@/lib/seo';
+import { getRequestSiteConfig } from '@/lib/server-seo';
 
-export const metadata = createSeoMetadata({
-  title: 'Hizmetlerimiz',
-  description:
-    'BEYVIP Translation Office pasaport, yeminli tercüme, noter onaylı tercüme, diploma, vize evrakı ve hukuki belge tercümesi hizmetleri.',
-  path: '/hizmetlerimiz',
-  image: '/beyvip/hero.png',
-  keywords: ['pasaport tercumesi', 'noter onayli tercume', 'yeminli tercume'],
-});
+export async function generateMetadata() {
+  const site = await getRequestSiteConfig();
+
+  return createSeoMetadata({
+    title: `${site.locationName} Tercüme Hizmetleri`,
+    description:
+      `${site.name} pasaport, yeminli tercüme, noter onaylı tercüme, diploma, vize evrakı ve hukuki belge tercümesi hizmetleri.`,
+    path: '/hizmetlerimiz',
+    image: '/beyvip/hero.png',
+    keywords: ['pasaport tercumesi', 'noter onayli tercume', 'yeminli tercume', `${site.locationName.toLocaleLowerCase('tr-TR')} tercume hizmetleri`],
+    site,
+  });
+}
 
 const services = [
   {
@@ -66,7 +72,8 @@ const services = [
   },
 ] as const;
 
-const ServicesPage = () => {
+const ServicesPage = async () => {
+  const activeSite = await getRequestSiteConfig();
   const servicesJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
@@ -78,14 +85,14 @@ const ServicesPage = () => {
         '@type': 'Service',
         name: service.title,
         description: service.description,
-        url: absoluteUrl(`/hizmetlerimiz/${service.slug}`),
-        image: absoluteUrl(service.image),
+        url: absoluteUrl(`/hizmetlerimiz/${service.slug}`, activeSite),
+        image: absoluteUrl(service.image, activeSite),
         provider: {
           '@type': 'ProfessionalService',
-          name: siteConfig.name,
-          url: siteConfig.url,
+          name: activeSite.name,
+          url: activeSite.url,
         },
-        areaServed: 'Turkey',
+        areaServed: activeSite.areaServed,
       },
     })),
   };

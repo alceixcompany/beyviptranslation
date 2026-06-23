@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next'
 import { collection, DocumentData, getDocs, query, where } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { siteConfig } from '@/lib/seo'
+import type { SiteConfig } from '@/lib/domain-seo'
 
 export type SitemapEntry = MetadataRoute.Sitemap[number]
 
@@ -30,70 +31,78 @@ function createSlug(value: string): string {
     .trim()
 }
 
-function absoluteSitemapUrl(path: string) {
-  return `${siteConfig.url}${path}`
+function absoluteSitemapUrl(path: string, site: SiteConfig = siteConfig) {
+  return `${site.url}${path}`
 }
 
-export const staticPageEntries: MetadataRoute.Sitemap = [
-  {
-    url: siteConfig.url,
-    lastModified: new Date(),
-    changeFrequency: 'weekly',
-    priority: 1,
-  },
-  {
-    url: absoluteSitemapUrl('/hizmetlerimiz'),
-    lastModified: new Date(),
-    changeFrequency: 'monthly',
-    priority: 0.9,
-  },
-  {
-    url: absoluteSitemapUrl('/hizmet-bolgelerimiz'),
-    lastModified: new Date(),
-    changeFrequency: 'monthly',
-    priority: 0.9,
-  },
-  {
-    url: absoluteSitemapUrl('/galeri'),
-    lastModified: new Date(),
-    changeFrequency: 'weekly',
-    priority: 0.8,
-  },
-  {
-    url: absoluteSitemapUrl('/haberler'),
-    lastModified: new Date(),
-    changeFrequency: 'daily',
-    priority: 0.8,
-  },
-  {
-    url: absoluteSitemapUrl('/hakkimizda'),
-    lastModified: new Date(),
-    changeFrequency: 'monthly',
-    priority: 0.7,
-  },
-  {
-    url: absoluteSitemapUrl('/iletisim'),
-    lastModified: new Date(),
-    changeFrequency: 'monthly',
-    priority: 0.8,
-  },
-]
+export function getStaticPageEntries(site: SiteConfig = siteConfig): MetadataRoute.Sitemap {
+  return [
+    {
+      url: site.url,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 1,
+    },
+    {
+      url: absoluteSitemapUrl('/hizmetlerimiz', site),
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: absoluteSitemapUrl('/hizmet-bolgelerimiz', site),
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: absoluteSitemapUrl('/galeri', site),
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: absoluteSitemapUrl('/haberler', site),
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.8,
+    },
+    {
+      url: absoluteSitemapUrl('/hakkimizda', site),
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: absoluteSitemapUrl('/iletisim', site),
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+  ];
+}
 
-export const serviceEntries: MetadataRoute.Sitemap = [
-  '/hizmetlerimiz/pasaport-tercumesi',
-  '/hizmetlerimiz/yeminli-tercume',
-  '/hizmetlerimiz/noter-onayli-tercume',
-  '/hizmetlerimiz/diploma-transkript-tercumesi',
-  '/hizmetlerimiz/vize-evraklari-tercumesi',
-  '/hizmetlerimiz/hukuki-tercume',
-].map((path) => ({
-  url: absoluteSitemapUrl(path),
-  lastModified: new Date(),
-  changeFrequency: 'monthly' as const,
-  priority: 0.8,
-}))
+export const staticPageEntries = getStaticPageEntries();
 
-export async function getNewsEntries(): Promise<MetadataRoute.Sitemap> {
+export function getServiceEntries(site: SiteConfig = siteConfig): MetadataRoute.Sitemap {
+  return [
+    '/hizmetlerimiz/pasaport-tercumesi',
+    '/hizmetlerimiz/yeminli-tercume',
+    '/hizmetlerimiz/noter-onayli-tercume',
+    '/hizmetlerimiz/diploma-transkript-tercumesi',
+    '/hizmetlerimiz/vize-evraklari-tercumesi',
+    '/hizmetlerimiz/hukuki-tercume',
+  ].map((path) => ({
+    url: absoluteSitemapUrl(path, site),
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }));
+}
+
+export const serviceEntries = getServiceEntries();
+
+export async function getNewsEntries(site: SiteConfig = siteConfig): Promise<MetadataRoute.Sitemap> {
   const newsSnapshot = await getDocs(query(collection(db, 'haberler'), where('isActive', '==', true)))
 
   return newsSnapshot.docs
@@ -104,7 +113,7 @@ export async function getNewsEntries(): Promise<MetadataRoute.Sitemap> {
       if (!slug) return null
 
       return {
-        url: absoluteSitemapUrl(`/haberler/${slug}`),
+        url: absoluteSitemapUrl(`/haberler/${slug}`, site),
         lastModified: toDate(data.updatedAt || data.createdAt),
         changeFrequency: 'weekly',
         priority: 0.7,
@@ -113,7 +122,7 @@ export async function getNewsEntries(): Promise<MetadataRoute.Sitemap> {
     .filter((entry): entry is SitemapEntry => Boolean(entry))
 }
 
-export async function getServiceAreaEntries(): Promise<MetadataRoute.Sitemap> {
+export async function getServiceAreaEntries(site: SiteConfig = siteConfig): Promise<MetadataRoute.Sitemap> {
   const serviceAreasSnapshot = await getDocs(
     query(collection(db, 'hizmet_bolgeleri'), where('isActive', '==', true))
   )
@@ -126,7 +135,7 @@ export async function getServiceAreaEntries(): Promise<MetadataRoute.Sitemap> {
       if (!slug) return null
 
       return {
-        url: absoluteSitemapUrl(`/hizmet-bolgelerimiz/${slug}`),
+        url: absoluteSitemapUrl(`/hizmet-bolgelerimiz/${slug}`, site),
         lastModified: toDate(data.updatedAt || data.createdAt),
         changeFrequency: 'monthly',
         priority: 0.8,
@@ -135,22 +144,22 @@ export async function getServiceAreaEntries(): Promise<MetadataRoute.Sitemap> {
     .filter((entry): entry is SitemapEntry => Boolean(entry))
 }
 
-export async function getAllSitemapEntries(): Promise<MetadataRoute.Sitemap> {
+export async function getAllSitemapEntries(site: SiteConfig = siteConfig): Promise<MetadataRoute.Sitemap> {
   try {
     const [newsEntries, serviceAreaEntries] = await Promise.all([
-      getNewsEntries(),
-      getServiceAreaEntries(),
+      getNewsEntries(site),
+      getServiceAreaEntries(site),
     ])
 
     return [
-      ...staticPageEntries,
-      ...serviceEntries,
+      ...getStaticPageEntries(site),
+      ...getServiceEntries(site),
       ...newsEntries,
       ...serviceAreaEntries,
     ]
   } catch (error) {
     console.error('Sitemap oluşturulurken hata:', error)
-    return [...staticPageEntries, ...serviceEntries]
+    return [...getStaticPageEntries(site), ...getServiceEntries(site)]
   }
 }
 
@@ -182,4 +191,3 @@ export function createUrlsetXml(entries: MetadataRoute.Sitemap): string {
   return `<?xml version="1.0" encoding="UTF-8"?>` +
     `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}</urlset>`
 }
-

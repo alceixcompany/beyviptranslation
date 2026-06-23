@@ -1,33 +1,7 @@
 import type { Metadata } from "next";
+import { defaultSiteConfig, type SiteConfig } from "@/lib/domain-seo";
 
-export const siteConfig = {
-  name: "BEYVIP Translation Office",
-  shortName: "BEYVIP",
-  url: "https://www.beyviptranslation.com",
-  locale: "tr_TR",
-  language: "tr",
-  phone: "+905334276383",
-  phoneDisplay: "+90 533 427 63 83",
-  whatsapp: "+905330923476",
-  whatsappDisplay: "+90 533 092 34 76",
-  email: "beyviptranslation@gmail.com",
-  instagram: "https://www.instagram.com/beyviptranslation",
-  instagramHandle: "@beyviptranslation",
-  address: {
-    streetAddress: "Istanbul",
-    addressLocality: "Istanbul",
-    addressRegion: "Istanbul",
-    postalCode: "",
-    addressCountry: "TR",
-    display: "İstanbul / Türkiye",
-  },
-  geo: {
-    latitude: 41.0082,
-    longitude: 28.9784,
-  },
-  defaultImage: "/beyvip/hero.png",
-  logo: "/beyvip/logo-horizontal-transparent-v2.png",
-};
+export const siteConfig = defaultSiteConfig;
 
 export const serviceKeywords = [
   "tercume burosu",
@@ -53,39 +27,44 @@ type SeoMetadataOptions = {
   type?: "website" | "article";
   publishedTime?: string;
   modifiedTime?: string;
+  site?: SiteConfig;
 };
 
-export function absoluteUrl(path = "/") {
+export function absoluteUrl(path = "/", site: SiteConfig = siteConfig) {
   if (path.startsWith("http")) return path;
-  return `${siteConfig.url}${path.startsWith("/") ? path : `/${path}`}`;
+  return `${site.url}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
 export function createSeoMetadata({
   title,
   description,
   path = "/",
-  image = siteConfig.defaultImage,
+  image,
   keywords = [],
   type = "website",
   publishedTime,
   modifiedTime,
+  site = siteConfig,
 }: SeoMetadataOptions): Metadata {
-  const url = absoluteUrl(path);
-  const imageUrl = absoluteUrl(image);
+  const url = absoluteUrl(path, site);
+  const imageUrl = absoluteUrl(image || site.defaultImage, site);
 
   return {
     title,
     description,
-    keywords: [...serviceKeywords, ...keywords],
+    keywords: [site.name, site.shortName, ...serviceKeywords, ...site.keywords, ...keywords],
     alternates: {
       canonical: url,
+      languages: {
+        "tr-TR": url,
+      },
     },
     openGraph: {
       title,
       description,
       url,
-      siteName: siteConfig.name,
-      locale: siteConfig.locale,
+      siteName: site.name,
+      locale: site.locale,
       type,
       images: [
         {
@@ -107,33 +86,33 @@ export function createSeoMetadata({
   };
 }
 
-export function localBusinessJsonLd() {
+export function localBusinessJsonLd(site: SiteConfig = siteConfig) {
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "@id": `${siteConfig.url}/#business`,
-    name: siteConfig.name,
-    url: siteConfig.url,
-    logo: absoluteUrl(siteConfig.logo),
-    image: absoluteUrl(siteConfig.defaultImage),
-    telephone: siteConfig.phone,
-    email: siteConfig.email,
+    "@id": `${site.url}/#business`,
+    name: site.name,
+    url: site.url,
+    logo: absoluteUrl(site.logo, site),
+    image: absoluteUrl(site.defaultImage, site),
+    telephone: site.phone,
+    email: site.email,
     priceRange: "$$",
     address: {
       "@type": "PostalAddress",
-      streetAddress: siteConfig.address.streetAddress,
-      addressLocality: siteConfig.address.addressLocality,
-      addressRegion: siteConfig.address.addressRegion,
-      postalCode: siteConfig.address.postalCode,
-      addressCountry: siteConfig.address.addressCountry,
+      streetAddress: site.address.streetAddress,
+      addressLocality: site.address.addressLocality,
+      addressRegion: site.address.addressRegion,
+      postalCode: site.address.postalCode,
+      addressCountry: site.address.addressCountry,
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: siteConfig.geo.latitude,
-      longitude: siteConfig.geo.longitude,
+      latitude: site.geo.latitude,
+      longitude: site.geo.longitude,
     },
-    areaServed: ["Istanbul", "Turkey", "Worldwide"],
-    sameAs: [siteConfig.instagram],
+    areaServed: site.areaServed,
+    sameAs: [site.instagram],
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -145,21 +124,21 @@ export function localBusinessJsonLd() {
   };
 }
 
-export function websiteJsonLd() {
+export function websiteJsonLd(site: SiteConfig = siteConfig) {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": `${siteConfig.url}/#website`,
-    url: siteConfig.url,
-    name: siteConfig.name,
+    "@id": `${site.url}/#website`,
+    url: site.url,
+    name: site.name,
     inLanguage: "tr-TR",
     publisher: {
-      "@id": `${siteConfig.url}/#business`,
+      "@id": `${site.url}/#business`,
     },
   };
 }
 
-export function breadcrumbJsonLd(items: Array<{ name: string; path: string }>) {
+export function breadcrumbJsonLd(items: Array<{ name: string; path: string }>, site: SiteConfig = siteConfig) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -167,7 +146,7 @@ export function breadcrumbJsonLd(items: Array<{ name: string; path: string }>) {
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      item: absoluteUrl(item.path),
+      item: absoluteUrl(item.path, site),
     })),
   };
 }

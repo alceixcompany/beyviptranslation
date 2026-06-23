@@ -10,11 +10,14 @@ import JsonLd from '@/components/JsonLd';
 import CountryFlagSlider from '@/components/CountryFlagSlider';
 import ServicePerks from '@/components/ServicePerks';
 import { localBusinessJsonLd, websiteJsonLd } from '@/lib/seo';
+import { getRequestSiteConfig } from '@/lib/server-seo';
 
-export default function Home() {
+export default async function Home() {
+  const site = await getRequestSiteConfig();
+
   return (
     <main className="home-flow min-h-screen">
-      <JsonLd data={[localBusinessJsonLd(), websiteJsonLd()]} />
+      <JsonLd data={[localBusinessJsonLd(site), websiteJsonLd(site)]} />
       <Hero />
       <CountryFlagSlider compact />
       <WhyChooseUs />

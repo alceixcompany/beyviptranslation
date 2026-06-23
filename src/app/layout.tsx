@@ -6,7 +6,8 @@ import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 import ReduxProvider from "@/components/ReduxProvider";
 import { LanguageProvider } from "@/components/LanguageProvider";
-import { absoluteUrl, serviceKeywords, siteConfig } from "@/lib/seo";
+import { absoluteUrl, serviceKeywords } from "@/lib/seo";
+import { getRequestSiteConfig } from "@/lib/server-seo";
 
 const dmSans = DM_Sans({ 
   subsets: ["latin", "latin-ext"],
@@ -24,85 +25,89 @@ const dancingScript = Dancing_Script({
   variable: '--font-dancing',
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
-  title: {
-    default: "BEYVIP Translation Office | Yeminli Tercüme Bürosu",
-    template: "%s | BEYVIP Translation Office",
-  },
-  description: "BEYVIP Translation Office pasaport, vize, ikamet, diploma, hukuki evrak, yeminli ve noter onaylı tercüme hizmetleri sunar.",
-  keywords: [
-    siteConfig.name,
-    siteConfig.shortName,
-    ...serviceKeywords,
-    "beyvip translation",
-  ],
-  authors: [{ name: siteConfig.name }],
-  creator: siteConfig.name,
-  publisher: siteConfig.name,
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+export async function generateMetadata(): Promise<Metadata> {
+  const activeSite = await getRequestSiteConfig();
+
+  return {
+    metadataBase: new URL(activeSite.url),
+    title: {
+      default: activeSite.title,
+      template: activeSite.titleTemplate,
+    },
+    description: activeSite.description,
+    keywords: [
+      activeSite.name,
+      activeSite.shortName,
+      ...serviceKeywords,
+      ...activeSite.keywords,
+    ],
+    authors: [{ name: activeSite.name }],
+    creator: activeSite.name,
+    publisher: activeSite.name,
+    robots: {
       index: true,
       follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
     },
-  },
-  alternates: {
-    canonical: siteConfig.url,
-    languages: {
-      "tr-TR": siteConfig.url,
+    alternates: {
+      canonical: activeSite.url,
+      languages: {
+        "tr-TR": activeSite.url,
+      },
     },
-  },
-  category: "translation",
-  classification: "Business",
-  other: {
-    "geo.region": "TR-34",
-    "geo.placename": "İstanbul, Türkiye",
-    "geo.position": `${siteConfig.geo.latitude};${siteConfig.geo.longitude}`,
-    "ICBM": `${siteConfig.geo.latitude}, ${siteConfig.geo.longitude}`,
-  },
-  icons: {
-    icon: [
-      { url: '/beyvip/favicon.png', sizes: '512x512', type: 'image/png' },
-      { url: '/browser_icon.png', sizes: '512x512', type: 'image/png' },
-    ],
-    shortcut: '/beyvip/favicon.png',
-    apple: [
-      { url: '/beyvip/favicon.png', sizes: '180x180', type: 'image/png' },
-    ],
-  },
-  openGraph: {
-    title: "BEYVIP Translation Office | Yeminli Tercüme Bürosu",
-    description: "Pasaport, vize, ikamet, diploma ve resmi evraklar için hızlı ve dikkatli tercüme hizmeti.",
-    type: "website",
-    locale: siteConfig.locale,
-    siteName: siteConfig.name,
-    url: siteConfig.url,
-    images: [
-      {
-        url: absoluteUrl(siteConfig.defaultImage),
-        width: 1200,
-        height: 630,
-        alt: siteConfig.name
-      }
-    ]
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
-    description: "BEYVIP Translation Office profesyonel tercüme hizmetleri.",
-    images: [absoluteUrl(siteConfig.defaultImage)]
-  },
-  formatDetection: {
-    telephone: true,
-    address: true,
-    email: true,
-  },
-};
+    category: "translation",
+    classification: "Business",
+    other: {
+      "geo.region": "TR-34",
+      "geo.placename": `${activeSite.locationName}, İstanbul, Türkiye`,
+      "geo.position": `${activeSite.geo.latitude};${activeSite.geo.longitude}`,
+      "ICBM": `${activeSite.geo.latitude}, ${activeSite.geo.longitude}`,
+    },
+    icons: {
+      icon: [
+        { url: '/beyvip/favicon.png', sizes: '512x512', type: 'image/png' },
+        { url: '/browser_icon.png', sizes: '512x512', type: 'image/png' },
+      ],
+      shortcut: '/beyvip/favicon.png',
+      apple: [
+        { url: '/beyvip/favicon.png', sizes: '180x180', type: 'image/png' },
+      ],
+    },
+    openGraph: {
+      title: activeSite.title,
+      description: activeSite.ogDescription,
+      type: "website",
+      locale: activeSite.locale,
+      siteName: activeSite.name,
+      url: activeSite.url,
+      images: [
+        {
+          url: absoluteUrl(activeSite.defaultImage, activeSite),
+          width: 1200,
+          height: 630,
+          alt: activeSite.name
+        }
+      ]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: activeSite.name,
+      description: activeSite.ogDescription,
+      images: [absoluteUrl(activeSite.defaultImage, activeSite)]
+    },
+    formatDetection: {
+      telephone: true,
+      address: true,
+      email: true,
+    },
+  };
+}
 
 export default function RootLayout({
   children,
